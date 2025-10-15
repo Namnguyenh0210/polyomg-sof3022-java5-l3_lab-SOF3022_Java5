@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Kiểm tra dữ liệu nhân viên - Lab 4</title>
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>i {
+        color: red;
+    }</style>
+</head>
+<body class="bg-light">
+<header class="bg-primary text-white py-4 mb-4 shadow">
+    <div class="container">
+        <h1 class="mb-0">Lab 4 - Kiểm tra dữ liệu nhân viên</h1>
+    </div>
+</header>
+<main class="container">
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <h2 class="mb-3">Form Validation</h2>
+            <i class="text-danger" th:text="${message}"></i>
+            <form action="/staff/create/save" class="row g-3" enctype="multipart/form-data" method="post"
+                  th:object="${staff}">
+                <div class="col-md-6">
+                    <label class="form-label">Email:</label>
+                    <input class="form-control" th:field="*{id}">
+                    <i th:errors="*{id}"></i>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Họ và tên:</label>
+                    <input class="form-control" th:field="*{fullname}">
+                    <i th:errors="*{fullname}"></i>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Giới tính:</label><br>
+                    <input th:field="*{gender}" type="radio" value="true"> Nam
+                    <input th:field="*{gender}" type="radio" value="false"> Nữ
+                    <i th:errors="*{gender}"></i>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Ngày sinh:</label>
+                    <input class="form-control" name="birthday" th:value="*{#dates.format(birthday, 'MM/dd/yyyy')}">
+                    <i th:errors="*{birthday}"></i>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Hình ảnh:</label>
+                    <input th:field="*{photo}" type="hidden">
+                    <input class="form-control" name="photo_file" type="file">
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Cấp bậc:</label>
+                    <select class="form-select" th:field="*{level}">
+                        <option value="0">Úy</option>
+                        <option value="1">Tá</option>
+                        <option value="2">Tướng</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Lương:</label>
+                    <input class="form-control" th:field="*{salary}">
+                    <i th:errors="*{salary}"></i>
+                </div>
+                <div class="col-12">
+                    <button class="btn btn-success">Validate</button>
+                    <a class="btn btn-outline-secondary ms-2" href="/">Về trang Lab4</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+<footer class="bg-light text-center py-3 border-top mt-4">
+    &copy; 2025 FPT Polytechnic. Thiết kế bởi sinh viên.
+</footer>
+</body>
+</html>
+
