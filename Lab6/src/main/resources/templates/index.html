@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>J5Shop - Lab 6 Management System</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 900px;
+            margin-top: 40px;
+        }
+        .card {
+            border: none;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .card-header {
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            font-weight: bold;
+        }
+        .feature-card {
+            transition: transform 0.2s;
+            height: 100%;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        .btn-feature {
+            width: 100%;
+            margin-top: auto;
+        }
+        .stats-row {
+            background-color: #e9ecef;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+        .stat-item {
+            text-align: center;
+        }
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="card">
+            <div class="card-header">
+                <h1><i class="fas fa-store me-2"></i>J5Shop - Hệ thống quản lý cửa hàng</h1>
+                <p class="mb-0">Lab 6: JPA Repository - Quản lý danh mục và sản phẩm</p>
+            </div>
+        </div>
+
+        <!-- Features -->
+        <div class="row g-3">
+            <div class="col-md-6">
+                <div class="card feature-card">
+                    <div class="card-body d-flex flex-column">
+                        <div class="text-center mb-3">
+                            <i class="fas fa-tags fa-3x text-primary"></i>
+                        </div>
+                        <h5 class="card-title text-center">Quản lý danh mục</h5>
+                        <p class="card-text">Thêm, sửa, xóa và quản lý các danh mục sản phẩm</p>
+                        <a href="/category/index" class="btn btn-primary btn-feature">
+                            Quản lý danh mục
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card feature-card">
+                    <div class="card-body d-flex flex-column">
+                        <div class="text-center mb-3">
+                            <i class="fas fa-sort-amount-down fa-3x text-success"></i>
+                        </div>
+                        <h5 class="card-title text-center">Sắp xếp sản phẩm</h5>
+                        <p class="card-text">Sắp xếp sản phẩm theo mã, tên, giá, ngày tạo</p>
+                        <a href="/product/sort" class="btn btn-success btn-feature">
+                            Sắp xếp sản phẩm
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card feature-card">
+                    <div class="card-body d-flex flex-column">
+                        <div class="text-center mb-3">
+                            <i class="fas fa-list fa-3x text-warning"></i>
+                        </div>
+                        <h5 class="card-title text-center">Phân trang sản phẩm</h5>
+                        <p class="card-text">Hiển thị sản phẩm theo trang với điều hướng</p>
+                        <a href="/product/page" class="btn btn-warning btn-feature">
+                            Phân trang sản phẩm
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card feature-card">
+                    <div class="card-body d-flex flex-column">
+                        <div class="text-center mb-3">
+                            <i class="fas fa-sliders-h fa-3x text-info"></i>
+                        </div>
+                        <h5 class="card-title text-center">Sắp xếp & Phân trang</h5>
+                        <p class="card-text">Kết hợp sắp xếp và phân trang sản phẩm</p>
+                        <a href="/product/sortpage" class="btn btn-info btn-feature">
+                            Sắp xếp & Phân trang
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats-row">
+            <div class="row">
+                <div class="col-md-4 stat-item">
+                    <div class="stat-number">4</div>
+                    <div>Chức năng chính</div>
+                </div>
+                <div class="col-md-4 stat-item">
+                    <div class="stat-number">100%</div>
+                    <div>Hoạt động</div>
+                </div>
+                <div class="col-md-4 stat-item">
+                    <div class="stat-number">Lab6</div>
+                    <div>JPA Repository</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

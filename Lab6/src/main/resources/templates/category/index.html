@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Quản lý danh mục - J5Shop</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 800px;
+            margin-top: 30px;
+        }
+        .card {
+            border: none;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .card-header {
+            background-color: #007bff;
+            color: white;
+            font-weight: bold;
+        }
+        .nav-breadcrumb {
+            background-color: white;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .nav-breadcrumb a {
+            text-decoration: none;
+            margin-right: 15px;
+        }
+        .table th {
+            background-color: #343a40;
+            color: white;
+        }
+        .badge-id {
+            background-color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation -->
+        <div class="nav-breadcrumb">
+            <a href="/" class="btn btn-outline-secondary btn-sm"><i class="fas fa-home"></i> Trang chủ</a>
+            <a href="/product/sort" class="btn btn-outline-primary btn-sm"><i class="fas fa-sort"></i> Sắp xếp SP</a>
+            <a href="/product/page" class="btn btn-outline-success btn-sm"><i class="fas fa-list"></i> Phân trang SP</a>
+            <a href="/product/sortpage" class="btn btn-outline-info btn-sm"><i class="fas fa-sliders-h"></i> Tổng hợp</a>
+        </div>
+
+        <!-- Form Section -->
+        <div class="card">
+            <div class="card-header text-center">
+                <h4><i class="fas fa-tags me-2"></i>QUẢN LÝ DANH MỤC SẢN PHẨM</h4>
+            </div>
+            <div class="card-body">
+                <th:block th:replace="category/_form :: _form"></th:block>
+            </div>
+        </div>
+
+        <!-- Table Section -->
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-table me-2"></i>Danh sách danh mục</h5>
+            </div>
+            <div class="card-body">
+                <th:block th:replace="category/_table :: _table"></th:block>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

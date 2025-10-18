@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <title>Phân trang sản phẩm - J5Shop</title>
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin-top: 30px;
+        }
+
+        .card {
+            border: none;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .card-header {
+            background-color: #ffc107;
+            color: black;
+            font-weight: bold;
+        }
+
+        .nav-breadcrumb {
+            background-color: white;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-breadcrumb a {
+            text-decoration: none;
+            margin-right: 10px;
+        }
+
+        .table th {
+            background-color: #343a40;
+            color: white;
+        }
+
+        .badge-id {
+            background-color: #6c757d;
+        }
+
+        .badge-price {
+            background-color: #28a745;
+        }
+
+        .badge-available {
+            background-color: #28a745;
+        }
+
+        .badge-unavailable {
+            background-color: #dc3545;
+        }
+
+        .pagination-info {
+            background-color: #e9ecef;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 15px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            text-align: center;
+        }
+
+        .info-item {
+            background-color: white;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #dee2e6;
+        }
+
+        .info-number {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #007bff;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Navigation -->
+        <div class="nav-breadcrumb">
+            <a href="/" class="btn btn-outline-secondary btn-sm"><i class="fas fa-home"></i> Trang chủ</a>
+            <a href="/category/index" class="btn btn-outline-primary btn-sm"><i class="fas fa-tags"></i> Quản lý danh mục
+            </a>
+            <a href="/product/sort" class="btn btn-outline-success btn-sm"><i class="fas fa-sort"></i> Sắp xếp SP</a>
+            <a href="/product/sortpage" class="btn btn-outline-info btn-sm"><i class="fas fa-sliders-h"></i> Tổng hợp
+            </a>
+        </div>
+
+        <!-- Header -->
+        <div class="card">
+            <div class="card-header text-center">
+                <h4><i class="fas fa-list me-2"></i>PHÂN TRANG SẢN PHẨM</h4>
+            </div>
+        </div>
+
+        <!-- Table Section -->
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-table me-2"></i>Danh sách sản phẩm</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Mã SP</th>
+                                <th>Tên sản phẩm</th>
+                                <th>Hình ảnh</th>
+                                <th>Giá bán</th>
+                                <th>Ngày tạo</th>
+                                <th>Trạng thái</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <th:block th:each="item: ${page.content}">
+                                <tr>
+                                    <td><span class="badge badge-id" th:text="${item.id}"></span></td>
+                                    <td class="fw-bold" th:text="${item.name}"></td>
+                                    <td>
+                                        <img th:src="@{'/images/' + ${item.image}}" alt="Product Image"
+                                            class="img-thumbnail" style="width: 50px; height: 50px;"
+                                            onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTAiIGhlaWdodD0iNTAiIHZpZXdCb3g9IjAgMCA1MCA1MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjUwIiBoZWlnaHQ9IjUwIiBmaWxsPSIjRTlFQ0VGIi8+CjxwYXRoIGQ9Ik0yNSAyMEMyNi4zODA3IDIwIDI3LjUgMTguODgwNyAyNy41IDE3LjVDMjcuNSAxNi4xMTkzIDI2LjM4MDcgMTUgMjUgMTVDMjMuNjE5MyAxNSAyMi41IDE2LjExOTMgMjIuNSAxNy41QzIyLjUgMTguODgwNyAyMy42MTkzIDIwIDI1IDIwWk0xNSAzNUwxOCAyNkwyNSAzMEwzMiAyNkwzNSAzNUgxNVoiIGZpbGw9IiM2QzZDNkMiLz4KPC9zdmc+Cg=='">
+                                    </td>
+                                    <td><span class="badge badge-price" th:text="${#numbers.formatCurrency(item.price)}"></span>
+                                    </td>
+                                    <td th:text="${#dates.format(item.createDate, 'dd/MM/yyyy')}"></td>
+                                    <td>
+                                        <span th:if="${item.available}" class="badge badge-available">Còn hàng</span>
+                                        <span th:unless="${item.available}" class="badge badge-unavailable">Hết hàng</span>
+                                    </td>
+                                </tr>
+                            </th:block>
+                            <tr th:if="${#lists.isEmpty(page.content)}">
+                                <td colspan="6" class="text-center text-muted">
+                                    <i class="fas fa-box-open fa-2x mb-2"></i>
+                                    <p>Chưa có sản phẩm nào</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Pagination Controls -->
+                <nav aria-label="Page navigation">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item">
+                            <a class="page-link" th:href="@{|/product/page?p=0|}">Đầu</a>
+                        </li>
+                        <li class="page-item" th:if="${page.number > 0}">
+                            <a class="page-link" th:href="@{|/product/page?p=${page.number - 1}|}">Trước</a>
+                        </li>
+                        <li class="page-item active">
+                            <span class="page-link">Trang [[${page.number + 1}]] / [[${page.totalPages}]]</span>
+                        </li>
+                        <li class="page-item" th:if="${page.number + 1 < page.totalPages}">
+                            <a class="page-link" th:href="@{|/product/page?p=${page.number + 1}|}">Sau</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" th:href="@{|/product/page?p=${page.totalPages - 1}|}">Cuối</a>
+                        </li>
+                    </ul>
+                </nav>
+
+                <!-- Page Info -->
+                <div class="pagination-info">
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-number" th:text="${page.numberOfElements}"></div>
+                            <div>SP hiện tại</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-number" th:text="${page.number + 1}"></div>
+                            <div>Trang hiện tại</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-number" th:text="${page.size}"></div>
+                            <div>Kích thước trang</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-number" th:text="${page.totalElements}"></div>
+                            <div>Tổng sản phẩm</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-number" th:text="${page.totalPages}"></div>
+                            <div>Tổng số trang</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
