@@ -1,0 +1,113 @@
+
+
+<body>
+    <div class="container">
+        <h1>Bài 2: Tìm kiếm và phân trang (@Query)</h1>
+
+        <form action="/product/search-and-page" method="post">
+            <input name="keywords" th:value="${session.keywords}" placeholder="Nhập từ khóa tìm kiếm...">
+            <button>Search</button>
+        </form>
+
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Create Date</th>
+                <th>Category</th>
+            </tr>
+            <tr th:each="item : ${page.content}">
+                <td th:text="${item.id}"></td>
+                <td th:text="${item.name}"></td>
+                <td th:text="${#numbers.formatDecimal(item.price, 0, 'COMMA', 2, 'POINT')}"></td>
+                <td th:text="${#dates.format(item.createDate, 'dd/MM/yyyy')}"></td>
+                <td th:text="${item.category.name}"></td>
+            </tr>
+        </table>
+
+        <div class="pagination">
+            <a th:href="@{/product/search-and-page(p=0)}">First</a>
+            <a th:href="@{/product/search-and-page(p=${page.number - 1})}"
+               th:if="${page.number > 0}">Previous</a>
+            <a th:href="@{/product/search-and-page(p=${page.number + 1})}"
+               th:if="${page.number < page.totalPages - 1}">Next</a>
+            <a th:href="@{/product/search-and-page(p=${page.totalPages - 1})}">Last</a>
+        </div>
+
+        <div class="page-info">
+            <ul>
+                <li>Số thực thể hiện tại: <strong>[[${page.numberOfElements}]]</strong></li>
+                <li>Trang số: <strong>[[${page.number + 1}]]</strong></li>
+                <li>Kích thước trang: <strong>[[${page.size}]]</strong></li>
+                <li>Tổng số thực thể: <strong>[[${page.totalElements}]]</strong></li>
+                <li>Tổng số trang: <strong>[[${page.totalPages}]]</strong></li>
+            </ul>
+        </div>
+
+        <a href="/" class="back-link">← Về trang chủ</a>
+    </div>
+</body>
+</html>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Bài 2 - Tìm kiếm và phân trang</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        form {
+            text-align: center;
+            margin: 20px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 4px;
+        }
+        input {
+            padding: 8px;
+            margin: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            width: 250px;
+        }
+        button {
+            padding: 8px 20px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Send Mail</title>
+</head>
+<body>
+<h2>Send Mail</h2>
+<form action="/mail/send" method="post" enctype="multipart/form-data">
+    <label>To:</label>
+    <input name="to" required />
+    <br>
+    <label>Subject:</label>
+    <input name="subject" />
+    <br>
+    <label>Body:</label>
+    <textarea name="body" rows="6" cols="60"></textarea>
+    <br>
+    <label>Mode:</label>
+    <select name="mode">
+        <option value="queue">Queue</option>
+        <option value="direct">Direct</option>
+    </select>
+    <br>
+    <button>Send</button>
+</form>
+</body>
+</html>
+
